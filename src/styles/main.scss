@@ -1,0 +1,149 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.scene {
+  min-height: 100vh;
+
+  .scene-0 {
+    height: 100vh;
+    overflow: hidden;
+
+    .bg {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+
+      transform-origin: top left;
+    }
+
+    .bg:nth-child(1) {
+      z-index: 100;
+      background: #000c50;
+      animation: rotate-bg 500ms cubic-bezier(.23,.5,.26,1) 0ms both;
+    }
+
+    .bg:nth-child(2) {
+      z-index: 200;
+      background: #142276;
+      animation: rotate-bg 500ms cubic-bezier(.23,.5,.26,1) 300ms both;
+    }
+
+    .bg:nth-child(3) {
+      z-index: 300;
+      background: #6a76bb;
+      animation: rotate-bg 500ms cubic-bezier(.23,.5,.26,1) 600ms both;
+    }
+
+    .bg:nth-child(4) {
+      z-index: 400;
+      background: #ffffff;
+      animation: rotate-bg 500ms cubic-bezier(.23,.5,.26,1) 900ms both;
+    }
+
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      min-height: 100vh;
+
+      h1 {
+        position: absolute;
+        font-size: 5rem;
+        letter-spacing: 0.8rem;
+        font-family: bananaslip;
+
+        span {
+          display: inline-block;
+        }
+      }
+
+      h1:nth-child(1) {
+        background: linear-gradient(-45deg, #5a75ed, #a1cefc);
+        background-clip: text;
+        color: transparent;
+
+        @for $i from 1 to 12 {
+          .c#{$i} {
+            animation:
+              char-in 500ms cubic-bezier(.03,.93,.1,1) 1100ms + $i * 50ms backwards,
+              char-out 350ms cubic-bezier(.03,.93,.1,1) (1100ms + (12 - $i) * 35ms) * 2 forwards;
+          }
+        }
+      }
+
+      h1:nth-child(2) {
+        background: linear-gradient(-45deg, #ed955a, #fcb9a1);
+        background-clip: text;
+        color: transparent;
+
+        @for $i from 1 to 13 {
+          .c#{$i} {
+            animation:
+              char-in 300ms cubic-bezier(.03,.93,.1,1) (1100ms + $i * 30ms) * 3 backwards,
+              char-out 200ms cubic-bezier(.03,.93,.1,1) (1100ms + (13 - $i) * 20ms) * 4.5 forwards;
+          }
+        }
+      }
+
+      h1:nth-child(3) {
+        background: linear-gradient(-45deg, #5aed5a, #a1fca9);
+        background-clip: text;
+        color: transparent;
+
+        @for $i from 1 to 15 {
+          .c#{$i} {
+            min-width: .5em;
+            animation:
+              char-in 150ms cubic-bezier(.03,.93,.1,1) (1100ms + $i * 15ms) * 5.5 backwards,
+              char-out 150ms cubic-bezier(.03,.93,.1,1) (1100ms + (15 - $i) * 15ms) * 7 forwards;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes rotate-bg {
+  0% {
+    transform: rotateZ(90deg);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
+}
+
+@keyframes char-in {
+  0% {
+    opacity: 0;
+    transform: translateY(32px) rotateZ(12deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateZ(0px) rotateZ(0deg);
+  }
+}
+
+@keyframes char-out {
+  0% {
+    opacity: 1;
+    transform: translateZ(0px) rotateZ(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-32px) rotateZ(-12deg);
+  }
+}
